@@ -32,7 +32,8 @@ public class tela_principal extends javax.swing.JFrame {
         jMenuItem3 = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         menuSair = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
+        menu_Soobre = new javax.swing.JMenu();
+        menuSobre = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -66,8 +67,22 @@ public class tela_principal extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu4);
 
-        jMenu3.setText("Sobre");
-        jMenuBar1.add(jMenu3);
+        menu_Soobre.setText("Sobre");
+        menu_Soobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menu_SoobreActionPerformed(evt);
+            }
+        });
+
+        menuSobre.setText("abrir sobre");
+        menuSobre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuSobreActionPerformed(evt);
+            }
+        });
+        menu_Soobre.add(menuSobre);
+
+        jMenuBar1.add(menu_Soobre);
 
         setJMenuBar(jMenuBar1);
 
@@ -83,6 +98,7 @@ public class tela_principal extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -98,9 +114,16 @@ public class tela_principal extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_menuSairActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void menu_SoobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_SoobreActionPerformed
+        
+    }//GEN-LAST:event_menu_SoobreActionPerformed
+
+    private void menuSobreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSobreActionPerformed
+        // FUNÇÃO PARA ABRIR A ABA SOBRE
+        tela_sobre sobre = new tela_sobre();
+        sobre.setVisible(true);
+    }//GEN-LAST:event_menuSobreActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -135,7 +158,6 @@ public class tela_principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
@@ -143,5 +165,7 @@ public class tela_principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu menuContato;
     private javax.swing.JMenuItem menuSair;
+    private javax.swing.JMenuItem menuSobre;
+    private javax.swing.JMenu menu_Soobre;
     // End of variables declaration//GEN-END:variables
 }
