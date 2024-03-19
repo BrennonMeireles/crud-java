@@ -10,7 +10,7 @@ public class tela_login extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
-    public tela_login() {;
+    public tela_login() {
         initComponents();
         conexao = mod_conexao.conector();
         
@@ -22,11 +22,34 @@ public class tela_login extends javax.swing.JFrame {
             lbl_conexao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/KnobCancel.png")));
         }
     }
-    
     public void logar(){
         String sql = "SELECT * FROM tb_autenticacao WHERE email=? AND senha=?";
+        try {
+//            CAPTURAR OQUE O USUARIO ESCREVEU
+              pst = conexao.prepareStatement(sql);
+              pst.setString(1, inpEmail.getText());
+              pst.setString(2, inpSenha.getText());
+        
+//            linha abaixo executa consulta
+              rs = pst.executeQuery();
+              
+//            se existir usuario e senha correspondente
+              if(rs.next()){
+                  
+                   tela_principal principal = new tela_principal();
+                   principal.setVisible(true);
+                   
+//                 é um metodo que implementa o código necessario para finalizar o objeto e liberar a memória.
+                   this.dispose();
+                   conexao.close();
+                   
+              } else {
+                  JOptionPane.showMessageDialog(null, "Usuario ou Senha INVALIDO !");
+              }
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(null, e);
+        }
     }
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -40,6 +63,7 @@ public class tela_login extends javax.swing.JFrame {
         lbl_conexao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setText("LOGIN");
@@ -113,6 +137,7 @@ public class tela_login extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void inpSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpSenhaActionPerformed
@@ -124,7 +149,8 @@ public class tela_login extends javax.swing.JFrame {
     }//GEN-LAST:event_inpEmailActionPerformed
 
     private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
+        // função para fazer a ação ao clicaer no botao entrar logar no msql:
+        logar();
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     /**
