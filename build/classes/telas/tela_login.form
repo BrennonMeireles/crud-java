@@ -43,7 +43,7 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="test_conexao" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbl_conexao" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace pref="76" max="32767" attributes="0"/>
@@ -66,7 +66,7 @@
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jToggleButton1" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="test_conexao" min="-2" max="-2" attributes="0"/>
+              <Component id="lbl_conexao" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="20" max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -109,7 +109,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jToggleButton1ActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JLabel" name="test_conexao">
+    <Component class="javax.swing.JLabel" name="lbl_conexao">
       <Properties>
         <Property name="text" type="java.lang.String" value="Conexao: "/>
       </Properties>

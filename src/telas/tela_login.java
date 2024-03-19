@@ -10,23 +10,23 @@ public class tela_login extends javax.swing.JFrame {
     PreparedStatement pst = null;
     ResultSet rs = null;
     
-    
-    public tela_login() {
+    public tela_login() {;
         initComponents();
         conexao = mod_conexao.conector();
         
         if (conexao != null) {
-            test_conexao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/KnobValidGreen.png")));
-        } else {
-            teste_conexao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icones/KnobCancel.png")));
+            lbl_conexao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/KnobValidGreen.png")));
+        } 
+        
+        else {
+            lbl_conexao.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/KnobCancel.png")));
         }
     }
+    
+    public void logar(){
+        String sql = "SELECT * FROM tb_autenticacao WHERE email=? AND senha=?";
     }
-
-
     
-    
-
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -37,7 +37,7 @@ public class tela_login extends javax.swing.JFrame {
         inpEmail = new javax.swing.JTextField();
         inpSenha = new javax.swing.JTextField();
         jToggleButton1 = new javax.swing.JToggleButton();
-        test_conexao = new javax.swing.JLabel();
+        lbl_conexao = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -67,7 +67,7 @@ public class tela_login extends javax.swing.JFrame {
             }
         });
 
-        test_conexao.setText("Conexao: ");
+        lbl_conexao.setText("Conexao: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -89,7 +89,7 @@ public class tela_login extends javax.swing.JFrame {
                                 .addComponent(inpSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(20, 20, 20)
-                        .addComponent(test_conexao)))
+                        .addComponent(lbl_conexao)))
                 .addContainerGap(76, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -108,7 +108,7 @@ public class tela_login extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jToggleButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(test_conexao)
+                .addComponent(lbl_conexao)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -169,6 +169,7 @@ public class tela_login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JLabel test_conexao;
+    private javax.swing.JLabel lbl_conexao;
     // End of variables declaration//GEN-END:variables
 }
+
