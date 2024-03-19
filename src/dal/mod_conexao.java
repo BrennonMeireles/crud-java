@@ -7,7 +7,7 @@ public class mod_conexao {
         java.sql.Connection conexao = null;
         
         String driver = "com.mysql.cj.jdbc.Driver";
-        String url    = "jdbc:mysql://localhost:3307/bancojavalogin";
+        String url    = "jdbc:mysql://localhost:3307/bancoJavaLogin";
         String user = "root";
         String password = "";
         
