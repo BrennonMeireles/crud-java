@@ -19,7 +19,7 @@ public class tela_user extends javax.swing.JFrame {
     }
     
     private void consultar(){
-    String sql = "SELECT * FROM tb_autenticacao WHERE id=?";
+    String sql = "SELECT * FROM tb_dados WHERE id=?";
     
     try {
     pst = conexao.prepareStatement(sql);
@@ -27,27 +27,51 @@ public class tela_user extends javax.swing.JFrame {
     
     rs = pst.executeQuery();
     if (rs.next()) {
-        inpNome.setText(rs.getString(2));
-        inpEmail.setText(rs.getString(3));
-        inpSenha.setText(rs.getString(4));
+        inpNome.setText  (rs.getString(2));
+        inpDdd.setText   (rs.getString(3));
+        inpTel.setText   (rs.getString(4));
+        inpEmail.setText (rs.getString(5));
+        inpNascimento.setText(rs.getString(6));
+        inpCpf.setText   (rs.getString(7));
+        inpEnd.setText   (rs.getString(8));
+        inpCidade.setText(rs.getString(9));
+        inpEstado.setText(rs.getString(10));
     } else {
         JOptionPane.showMessageDialog(null, "USUARIO NÃO CADASTRADO...");
 //      nas linhas abaixo limpam os campos do formulario
-        inpNome.setText(null);
-        inpEmail.setText(null);
-        inpSenha.setText(null);
+        inpTel.setText   (null);
+        inpNome.setText  (null);
+        inpCidade.setText(null);
+                
+        inpNome.setText  (null);
+        inpDdd.setText   (null);
+        inpTel.setText   (null);
+        inpEmail.setText (null);
+        inpNascimento.setText(null);
+        inpCpf.setText   (null);
+        inpEnd.setText   (null);
+        inpCidade.setText(null);
+        inpEstado.setText(null);
     }   
     }catch (Exception e){
         JOptionPane.showConfirmDialog(null, e);
         }
     }
     private void adicionar(){
-    String sql = "INSERT INTO tb_autenticacao (email,senha) VALUES (?,?,?)";
+        String sql = "INSERT INTO tb_dados (id,nome,DDD,tel,email,dataNascimento,cpf,endereco,cidade,estado) VALUES (?,?,?,?,?,?,?,?,?,?)";
+
     try {
-        pst = conexao.prepareStatement(sql);
-        pst.setString(1 ,inpNome.getText());
-        pst.setString(2 ,inpEmail.getText());
-        pst.setString(3 ,inpSenha.getText());
+            pst = conexao.prepareStatement(sql);
+            pst.setString(1, inpEstado.getText());
+            pst.setString(2, inpCidade.getText());
+            pst.setString(3, inpEnd.getText());
+            pst.setString(4, inpCpf.getText());
+            pst.setString(5, inpNascimento.getText());
+            pst.setString(6, inpEmail.getText());
+            pst.setString(7, inpTel.getText());
+            pst.setString(8, inpDdd.getText());
+            pst.setString(9, inpNome.getText());
+            pst.setString(10, inpId.getText());
         
         int adicionado = pst.executeUpdate(); // retorna 1 se estiver correto
         
@@ -55,10 +79,18 @@ public class tela_user extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, "Usuario Cadastrado");
     //      Exibe a msg caso inserido com sucesso
     //      as linhas abaixo irão limpar o formulario
-            inpNome.setText(null);
-            inpEmail.setText(null);
-            inpSenha.setText(null);
-            inpNome.setText(null);
+            inpTel.setText   (null);
+            inpNome.setText  (null);
+            inpCidade.setText(null);         
+            inpNome.setText  (null);
+            inpDdd.setText   (null);
+            inpTel.setText   (null);
+            inpEmail.setText (null);
+            inpNascimento.setText(null);
+            inpCpf.setText   (null);
+            inpEnd.setText   (null);
+            inpCidade.setText(null);
+            inpEstado.setText(null);
         }    
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Erro ao adicionar usuário: " + e.getMessage());
@@ -66,13 +98,20 @@ public class tela_user extends javax.swing.JFrame {
     }
     
     private void alterar() {
-        String sql = "UPDATE tb_autenticaco SET email = ?, senha = ? WHERE id = ?";
+        String sql = "UPDATE tb_dados SET email = ?, senha = ? WHERE id = ?";
         try {
             pst = conexao.prepareStatement(sql);
-            pst.setString(1, inpNome.getText());
-            pst.setString(2, inpEmail.getText());
-            pst.setString(3, inpSenha.getText());
-            pst.setString(4, inpId.getText());
+            pst.setString(1, inpId.getText());
+            pst.setString(2, inpNome.getText());
+            pst.setString(3, inpDdd.getText());
+            pst.setString(4, inpTel.getText());
+            pst.setString(5, inpEmail.getText());
+            pst.setString(6, inpNascimento.getText());
+            pst.setString(7, inpCpf.getText());
+            pst.setString(8, inpEnd.getText());
+            pst.setString(9, inpCidade.getText());
+            pst.setString(10, inpEstado.getText());
+            
             int adicionado = pst.executeUpdate();
             // Retorna 1 se OK
             if (adicionado > 0) {
@@ -86,7 +125,7 @@ public class tela_user extends javax.swing.JFrame {
     private void apagar(){
         int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir este usuario?", "ATENÇÃO", JOptionPane.YES_NO_OPTION);
         if(confirma == JOptionPane.YES_OPTION){
-            String sql = "DELETE FROM tb_autenticacao WHERE id = ?";
+            String sql = "DELETE FROM tb_dados WHERE id = ?";
             try{
                 pst = conexao.prepareStatement(sql);
                 pst.setString(1, inpId.getText());
@@ -109,10 +148,22 @@ public class tela_user extends javax.swing.JFrame {
         email = new javax.swing.JLabel();
         senha = new javax.swing.JLabel();
         inpId = new javax.swing.JTextField();
+        inpTel = new javax.swing.JTextField();
         inpNome = new javax.swing.JTextField();
-        inpEmail = new javax.swing.JTextField();
-        inpSenha = new javax.swing.JTextField();
+        inpCidade = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        inpDdd = new javax.swing.JTextField();
+        inpEmail = new javax.swing.JTextField();
+        inpNascimento = new javax.swing.JTextField();
+        inpEnd = new javax.swing.JTextField();
+        inpCpf = new javax.swing.JTextField();
+        inpEstado = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -150,11 +201,17 @@ public class tela_user extends javax.swing.JFrame {
 
         email.setText("Email:");
 
-        senha.setText("Senha");
+        senha.setText("Cidade");
 
         inpId.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 inpIdActionPerformed(evt);
+            }
+        });
+
+        inpTel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inpTelActionPerformed(evt);
             }
         });
 
@@ -164,64 +221,157 @@ public class tela_user extends javax.swing.JFrame {
             }
         });
 
+        inpCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inpCidadeActionPerformed(evt);
+            }
+        });
+
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel1.setText("TELA CADASTRO");
+
+        jLabel2.setText("DDD");
+
+        jLabel3.setText("Telefone");
+
+        jLabel4.setText("Data de Nascimento:");
+
+        jLabel5.setText("CPF");
+
+        jLabel6.setText("Endereço");
+
+        jLabel7.setText("Estado");
+
+        inpEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inpEmailActionPerformed(evt);
+            }
+        });
+
+        inpNascimento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inpNascimentoActionPerformed(evt);
+            }
+        });
+
+        inpEnd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inpEndActionPerformed(evt);
+            }
+        });
+
+        inpCpf.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inpCpfActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
+                .addGap(265, 265, 265)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(250, 250, 250)
-                        .addComponent(jLabel1)
-                        .addGap(0, 135, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(110, 110, 110)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(email)
-                            .addComponent(senha)
-                            .addComponent(nome))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(inpSenha)
-                            .addComponent(inpEmail)
-                            .addComponent(inpNome)
-                            .addComponent(inpId)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnAdd)
                             .addComponent(btnVisualizar))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
-                            .addComponent(btnApagar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(110, 110, 110))
+                            .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(nome)
+                                    .addComponent(email)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(34, 34, 34)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(inpEmail)
+                                    .addComponent(inpNome)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(inpDdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel3)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(inpTel))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(inpNascimento))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(ID, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(inpId, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(senha)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(jLabel6)
+                                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGap(20, 20, 20)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(inpEstado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(inpCidade)
+                                            .addComponent(inpCpf)
+                                            .addComponent(inpEnd))))))))
+                .addGap(50, 50, 50))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addGap(40, 40, 40)
+                .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inpId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ID))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(inpNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(email))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inpEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nome))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(inpDdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(inpTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(email)
+                    .addComponent(inpEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(inpNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(inpCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(inpEnd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(senha)
-                    .addComponent(inpSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(inpCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(inpEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
@@ -232,7 +382,7 @@ public class tela_user extends javax.swing.JFrame {
                         .addComponent(btnEdit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnApagar)))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -262,10 +412,34 @@ public class tela_user extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inpIdActionPerformed
 
-    private void inpNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpNomeActionPerformed
+    private void inpTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpTelActionPerformed
         // TODO add your handling code here:
 
+    }//GEN-LAST:event_inpTelActionPerformed
+
+    private void inpEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpEmailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inpEmailActionPerformed
+
+    private void inpNascimentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpNascimentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inpNascimentoActionPerformed
+
+    private void inpEndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpEndActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inpEndActionPerformed
+
+    private void inpCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpCpfActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inpCpfActionPerformed
+
+    private void inpNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpNomeActionPerformed
+        // TODO add your handling code here:
     }//GEN-LAST:event_inpNomeActionPerformed
+
+    private void inpCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpCidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inpCidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,11 +483,23 @@ public class tela_user extends javax.swing.JFrame {
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnVisualizar;
     private javax.swing.JLabel email;
+    private javax.swing.JTextField inpCidade;
+    private javax.swing.JTextField inpCpf;
+    private javax.swing.JTextField inpDdd;
     private javax.swing.JTextField inpEmail;
+    private javax.swing.JTextField inpEnd;
+    private javax.swing.JTextField inpEstado;
     private javax.swing.JTextField inpId;
+    private javax.swing.JTextField inpNascimento;
     private javax.swing.JTextField inpNome;
-    private javax.swing.JTextField inpSenha;
+    private javax.swing.JTextField inpTel;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel nome;
     private javax.swing.JLabel senha;
     // End of variables declaration//GEN-END:variables
