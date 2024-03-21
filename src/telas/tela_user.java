@@ -183,7 +183,7 @@ public class tela_user extends javax.swing.JFrame {
         });
 
         ID.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        ID.setText("ID:");
+        ID.setText("ID");
 
         btnApagar.setText("Apagar  Usuario");
         btnApagar.addActionListener(new java.awt.event.ActionListener() {
@@ -193,7 +193,7 @@ public class tela_user extends javax.swing.JFrame {
         });
 
         nome.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        nome.setText("Nome:");
+        nome.setText("Nome");
 
         btnEdit.setText("Editar");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -203,7 +203,7 @@ public class tela_user extends javax.swing.JFrame {
         });
 
         email.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        email.setText("Email:");
+        email.setText("Email");
 
         senha.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         senha.setText("Cidade");
@@ -242,7 +242,7 @@ public class tela_user extends javax.swing.JFrame {
         jLabel3.setText("Telefone");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel4.setText("Data de Nascimento:");
+        jLabel4.setText("Data de Nascimento");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("CPF");
@@ -328,8 +328,8 @@ public class tela_user extends javax.swing.JFrame {
                                     .addComponent(senha)
                                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6)
-                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(20, 20, 20)
+                                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(inpEstado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(inpCidade)
@@ -352,7 +352,7 @@ public class tela_user extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addGap(50, 50, 50)
                 .addComponent(jLabel1)
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -401,10 +401,11 @@ public class tela_user extends javax.swing.JFrame {
                     .addComponent(btnVisualizar)
                     .addComponent(btnLimpar)
                     .addComponent(btnApagar))
-                .addContainerGap(72, Short.MAX_VALUE))
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
