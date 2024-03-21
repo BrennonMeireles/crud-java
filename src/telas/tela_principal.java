@@ -27,9 +27,10 @@ public class tela_principal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem2 = new javax.swing.JMenuItem();
+        desktop = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuContato = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        menuUsuario = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
         menuSair = new javax.swing.JMenuItem();
         menu_Soobre = new javax.swing.JMenu();
@@ -43,15 +44,26 @@ public class tela_principal extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        javax.swing.GroupLayout desktopLayout = new javax.swing.GroupLayout(desktop);
+        desktop.setLayout(desktopLayout);
+        desktopLayout.setHorizontalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        desktopLayout.setVerticalGroup(
+            desktopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 277, Short.MAX_VALUE)
+        );
+
         menuContato.setText("Cadastrar");
 
-        jMenuItem3.setText("Contato");
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+        menuUsuario.setText("Contato");
+        menuUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem3ActionPerformed(evt);
+                menuUsuarioActionPerformed(evt);
             }
         });
-        menuContato.add(jMenuItem3);
+        menuContato.add(menuUsuario);
 
         jMenuBar1.add(menuContato);
 
@@ -90,20 +102,24 @@ public class tela_principal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(desktop)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addComponent(desktop)
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    private void menuUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuUsuarioActionPerformed
+        // FUNÇÃO PARA ACESSAR A TELA USUARIOS:
+        
+        tela_user usuario = new tela_user();
+        usuario.setVisible(true);
+        desktop.add(usuario);
+    }//GEN-LAST:event_menuUsuarioActionPerformed
 
     private void menuSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuSairActionPerformed
         // FUNÇÃO PARA FECHAR O APP
@@ -157,15 +173,16 @@ public class tela_principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JDesktopPane desktop;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenu menuContato;
     private javax.swing.JMenuItem menuSair;
     private javax.swing.JMenuItem menuSobre;
+    private javax.swing.JMenuItem menuUsuario;
     private javax.swing.JMenu menu_Soobre;
     // End of variables declaration//GEN-END:variables
 }
