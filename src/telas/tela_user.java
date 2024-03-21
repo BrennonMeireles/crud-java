@@ -19,15 +19,15 @@ public class tela_user extends javax.swing.JFrame {
     }
     
     private void consultar(){
-    String sql = "SELECT * FROM tb_dados WHERE id=?";
+    String sql = "SELECT * FROM tb_dados WHERE email=?";
     
     try {
     pst = conexao.prepareStatement(sql);
-    pst.setString(1,inpId.getText());
+    pst.setString(1,inpEmail.getText());
     
     rs = pst.executeQuery();
     if (rs.next()) {
-        inpNome.setText  (rs.getString(2));
+        inpnomes.setText (rs.getString(2));
         inpDdd.setText   (rs.getString(3));
         inpTel.setText   (rs.getString(4));
         inpEmail.setText (rs.getString(5));
@@ -40,10 +40,10 @@ public class tela_user extends javax.swing.JFrame {
         JOptionPane.showMessageDialog(null, "USUARIO NÃO CADASTRADO...");
 //      nas linhas abaixo limpam os campos do formulario
         inpTel.setText   (null);
-        inpNome.setText  (null);
+        inpnomes.setText (null);
         inpCidade.setText(null);
                 
-        inpNome.setText  (null);
+        inpnomes.setText (null);
         inpDdd.setText   (null);
         inpTel.setText   (null);
         inpEmail.setText (null);
@@ -58,7 +58,7 @@ public class tela_user extends javax.swing.JFrame {
         }
     }
     private void adicionar(){
-        String sql = "INSERT INTO tb_dados (id,nome,DDD,tel,email,dataNascimento,cpf,endereco,cidade,estado) VALUES (?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO tb_dados (id,nome,DDD,celular,email,dataNascimento,cpf,endereco,cidade,estado) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
     try {
             pst = conexao.prepareStatement(sql);
@@ -70,7 +70,7 @@ public class tela_user extends javax.swing.JFrame {
             pst.setString(6, inpEmail.getText());
             pst.setString(7, inpTel.getText());
             pst.setString(8, inpDdd.getText());
-            pst.setString(9, inpNome.getText());
+            pst.setString(9, inpnomes.getText());
             pst.setString(10, inpId.getText());
         
         int adicionado = pst.executeUpdate(); // retorna 1 se estiver correto
@@ -80,9 +80,9 @@ public class tela_user extends javax.swing.JFrame {
     //      Exibe a msg caso inserido com sucesso
     //      as linhas abaixo irão limpar o formulario
             inpTel.setText   (null);
-            inpNome.setText  (null);
+            inpnomes.setText  (null);
             inpCidade.setText(null);         
-            inpNome.setText  (null);
+            inpnomes.setText  (null);
             inpDdd.setText   (null);
             inpTel.setText   (null);
             inpEmail.setText (null);
@@ -102,7 +102,7 @@ public class tela_user extends javax.swing.JFrame {
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, inpId.getText());
-            pst.setString(2, inpNome.getText());
+            pst.setString(2, inpnomes.getText());
             pst.setString(3, inpDdd.getText());
             pst.setString(4, inpTel.getText());
             pst.setString(5, inpEmail.getText());
@@ -149,7 +149,7 @@ public class tela_user extends javax.swing.JFrame {
         senha = new javax.swing.JLabel();
         inpId = new javax.swing.JTextField();
         inpTel = new javax.swing.JTextField();
-        inpNome = new javax.swing.JTextField();
+        inpnomes = new javax.swing.JTextField();
         inpCidade = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -215,9 +215,9 @@ public class tela_user extends javax.swing.JFrame {
             }
         });
 
-        inpNome.addActionListener(new java.awt.event.ActionListener() {
+        inpnomes.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                inpNomeActionPerformed(evt);
+                inpnomesActionPerformed(evt);
             }
         });
 
@@ -241,6 +241,8 @@ public class tela_user extends javax.swing.JFrame {
         jLabel6.setText("Endereço");
 
         jLabel7.setText("Estado");
+
+        inpDdd.setMinimumSize(new java.awt.Dimension(400, 400));
 
         inpEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,21 +273,8 @@ public class tela_user extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(265, 265, 265)
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAdd)
-                            .addComponent(btnVisualizar))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGap(50, 50, 50)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -296,7 +285,7 @@ public class tela_user extends javax.swing.JFrame {
                                 .addGap(34, 34, 34)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(inpEmail)
-                                    .addComponent(inpNome)
+                                    .addComponent(inpnomes)
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(inpDdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -325,8 +314,21 @@ public class tela_user extends javax.swing.JFrame {
                                             .addComponent(inpEstado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 462, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(inpCidade)
                                             .addComponent(inpCpf)
-                                            .addComponent(inpEnd))))))))
+                                            .addComponent(inpEnd)))))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnAdd)
+                            .addComponent(btnVisualizar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnApagar, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(50, 50, 50))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(265, 265, 265)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -339,15 +341,14 @@ public class tela_user extends javax.swing.JFrame {
                     .addComponent(ID))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(inpNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(inpnomes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nome))
-                .addGap(5, 5, 5)
+                .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(inpDdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(inpTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel3)
+                    .addComponent(inpTel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(email)
@@ -382,7 +383,7 @@ public class tela_user extends javax.swing.JFrame {
                         .addComponent(btnEdit)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnApagar)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(88, Short.MAX_VALUE))
         );
 
         pack();
@@ -414,7 +415,6 @@ public class tela_user extends javax.swing.JFrame {
 
     private void inpTelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpTelActionPerformed
         // TODO add your handling code here:
-
     }//GEN-LAST:event_inpTelActionPerformed
 
     private void inpEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpEmailActionPerformed
@@ -433,9 +433,9 @@ public class tela_user extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_inpCpfActionPerformed
 
-    private void inpNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpNomeActionPerformed
+    private void inpnomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpnomesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_inpNomeActionPerformed
+    }//GEN-LAST:event_inpnomesActionPerformed
 
     private void inpCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpCidadeActionPerformed
         // TODO add your handling code here:
@@ -491,8 +491,8 @@ public class tela_user extends javax.swing.JFrame {
     private javax.swing.JTextField inpEstado;
     private javax.swing.JTextField inpId;
     private javax.swing.JTextField inpNascimento;
-    private javax.swing.JTextField inpNome;
     private javax.swing.JTextField inpTel;
+    private javax.swing.JTextField inpnomes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
