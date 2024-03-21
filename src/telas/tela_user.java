@@ -98,7 +98,8 @@ public class tela_user extends javax.swing.JFrame {
     }
     
     private void alterar() {
-        String sql = "UPDATE tb_dados SET email = ?, senha = ? WHERE id = ?";
+        String sql = "UPDATE tb_dados SET email = ?, DDD = ?, tel = ?, dataNascimento = ?, cpf = ?, endereco = ?, cidade = ?, estado = ? WHERE id = ?";
+
         try {
             pst = conexao.prepareStatement(sql);
             pst.setString(1, inpId.getText());
