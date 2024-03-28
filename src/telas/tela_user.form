@@ -41,12 +41,12 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="inpEmail" alignment="0" max="32767" attributes="0"/>
                           <Component id="inpnomes" alignment="0" max="32767" attributes="0"/>
-                          <Group type="102" attributes="0">
-                              <Component id="inpDdd" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="inpDdd" min="-2" pref="121" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="inpTel" max="32767" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="inpTel" min="-2" pref="255" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -164,7 +164,7 @@
                   <Component id="btnLimpar" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnApagar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="42" max="32767" attributes="0"/>
+              <EmptySpace pref="50" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -313,9 +313,12 @@
     <Component class="javax.swing.JTextField" name="inpDdd">
       <Properties>
         <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[100, 100]"/>
+          <Dimension value="[300, 300]"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="inpDddActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JTextField" name="inpEmail">
       <Events>
