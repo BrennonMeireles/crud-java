@@ -58,7 +58,7 @@ public class tela_user extends javax.swing.JFrame {
         }
     }
     private void adicionar(){
-        String cpfFormatado = formatarCPF(inpCpf.getText());
+//        String cpfFormatado = formatarCPF(inpCpf.getText());
 
         String sql = "INSERT INTO tb_dados (id,nome,DDD,celular,email,dataNascimento,cpf,endereco,cidade,estado) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
@@ -100,7 +100,7 @@ public class tela_user extends javax.swing.JFrame {
     }
     
     private void alterar() {
-        String cpfFormatado = formatarCPF(inpCpf.getText());
+//        String cpfFormatado = formatarCPF(inpCpf.getText());
 
         String sql = "UPDATE tb_dados SET email = ?, DDD = ?, tel = ?, dataNascimento = ?, cpf = ?, endereco = ?, cidade = ?, estado = ? WHERE id = ?";
 
@@ -141,59 +141,59 @@ public class tela_user extends javax.swing.JFrame {
         }
     }
     
-    private String formatarCPF(String cpf) {
-    // Remove caracteres não numéricos
-    cpf = cpf.replaceAll("[^0-9]", "");
-    
-    // Insere os pontos e o traço
-    return cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9);
-}
-
-    public class CPFValidator {
-        public static boolean validarCPF(String cpf_str) {
-            // Verificar se o CPF tem 11 dígitos
-            if (cpf_str.length() != 11) {
-                JOptionPane.showMessageDialog(null, "CPF deve ter 11 dígitos. Tente novamente.");
-                return false;
-            }
-
-            char[] cpf_char = cpf_str.toCharArray();
-            int[] cpf_int = new int[cpf_char.length];
-
-            for (int i = 0; i < cpf_char.length; i++) {
-                cpf_int[i] = Character.getNumericValue(cpf_char[i]);
-            }
-
-            // Calcular o primeiro dígito verificador
-            int soma = 0;
-            for (int i = 0; i < 9; i++) {
-                soma += cpf_int[i] * (10 - i);
-            }
-            int primeiroDigito = 11 - (soma % 11);
-            if (primeiroDigito > 9) {
-                primeiroDigito = 0;
-            }
-
-            // Calcular o segundo dígito verificador
-            soma = 0;
-            for (int i = 0; i < 10; i++) {
-                soma += cpf_int[i] * (11 - i);
-            }
-            int segundoDigito = 11 - (soma % 11);
-            if (segundoDigito > 9) {
-                segundoDigito = 0;
-            }
-
-            // Verificar se os dígitos verificadores estão corretos
-            if (cpf_int[9] == primeiroDigito && cpf_int[10] == segundoDigito) {
-                JOptionPane.showMessageDialog(null, "CPF válido.");
-                return true;
-            } else {
-                JOptionPane.showMessageDialog(null, "CPF inválido. Tente novamente.");
-                return false;
-            }
-        }
-    }
+//    private String formatarCPF(String cpf) {
+//    // Remove caracteres não numéricos
+//    cpf = cpf.replaceAll("[^0-9]", "");
+//    
+//    // Insere os pontos e o traço
+//    return cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9);
+//}
+//
+//    public class CPFValidator {
+//        public static boolean validarCPF(String cpf_str) {
+//            // Verificar se o CPF tem 11 dígitos
+//            if (cpf_str.length() != 11) {
+//                JOptionPane.showMessageDialog(null, "CPF deve ter 11 dígitos. Tente novamente.");
+//                return false;
+//            }
+//
+//            char[] cpf_char = cpf_str.toCharArray();
+//            int[] cpf_int = new int[cpf_char.length];
+//
+//            for (int i = 0; i < cpf_char.length; i++) {
+//                cpf_int[i] = Character.getNumericValue(cpf_char[i]);
+//            }
+//
+//            // Calcular o primeiro dígito verificador
+//            int soma = 0;
+//            for (int i = 0; i < 9; i++) {
+//                soma += cpf_int[i] * (10 - i);
+//            }
+//            int primeiroDigito = 11 - (soma % 11);
+//            if (primeiroDigito > 9) {
+//                primeiroDigito = 0;
+//            }
+//
+//            // Calcular o segundo dígito verificador
+//            soma = 0;
+//            for (int i = 0; i < 10; i++) {
+//                soma += cpf_int[i] * (11 - i);
+//            }
+//            int segundoDigito = 11 - (soma % 11);
+//            if (segundoDigito > 9) {
+//                segundoDigito = 0;
+//            }
+//
+//            // Verificar se os dígitos verificadores estão corretos
+//            if (cpf_int[9] == primeiroDigito && cpf_int[10] == segundoDigito) {
+//                JOptionPane.showMessageDialog(null, "CPF válido.");
+//                return true;
+//            } else {
+//                JOptionPane.showMessageDialog(null, "CPF inválido. Tente novamente.");
+//                return false;
+//            }
+//        }
+//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -312,7 +312,12 @@ public class tela_user extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel7.setText("Estado");
 
-        inpDdd.setMinimumSize(new java.awt.Dimension(100, 100));
+        inpDdd.setMinimumSize(new java.awt.Dimension(300, 300));
+        inpDdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inpDddActionPerformed(evt);
+            }
+        });
 
         inpEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -366,11 +371,11 @@ public class tela_user extends javax.swing.JFrame {
                             .addComponent(inpEmail)
                             .addComponent(inpnomes)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(inpDdd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(inpDdd, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel3)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(inpTel))))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(inpTel, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -460,7 +465,7 @@ public class tela_user extends javax.swing.JFrame {
                     .addComponent(btnVisualizar)
                     .addComponent(btnLimpar)
                     .addComponent(btnApagar))
-                .addContainerGap(42, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         pack();
@@ -509,8 +514,8 @@ public class tela_user extends javax.swing.JFrame {
 
     private void inpCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpCpfActionPerformed
         // validar CPF
-        String cpf = inpCpf.getText();
-        boolean cpfValido = CPFValidator.validarCPF(cpf);
+//        String cpf = inpCpf.getText();
+//        boolean cpfValido = CPFValidator.validarCPF(cpf);
     }//GEN-LAST:event_inpCpfActionPerformed
 
     private void inpnomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpnomesActionPerformed
@@ -537,6 +542,10 @@ public class tela_user extends javax.swing.JFrame {
             inpCidade.setText(null);
             inpEstado.setText(null);
     }//GEN-LAST:event_btnLimparActionPerformed
+
+    private void inpDddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpDddActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_inpDddActionPerformed
 
     /**
      * @param args the command line arguments

@@ -8,18 +8,6 @@ public class tela_principal extends javax.swing.JFrame {
     public tela_principal() {
         initComponents();
     }
-
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
