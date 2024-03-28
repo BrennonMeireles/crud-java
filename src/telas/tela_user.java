@@ -58,45 +58,52 @@ public class tela_user extends javax.swing.JFrame {
         }
     }
     private void adicionar(){
-//        String cpfFormatado = formatarCPF(inpCpf.getText());
+    // Validação do CPF
+    String cpf = inpCpf.getText();
+    boolean cpfValido = CPFValidator.validarCPF(cpf);
+    
+    if (!cpfValido) {
+        JOptionPane.showMessageDialog(null, "CPF inválido. Por favor, insira um CPF válido.");
+        return;
+    }
 
-        String sql = "INSERT INTO tb_dados (id,nome,DDD,celular,email,dataNascimento,cpf,endereco,cidade,estado) VALUES (?,?,?,?,?,?,?,?,?,?)";
+    String sql = "INSERT INTO tb_dados (nome, DDD, celular, email, dataNascimento, cpf, endereco, cidade, estado) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, inpEstado.getText());
-            pst.setString(2, inpCidade.getText());
-            pst.setString(3, inpEnd.getText());
-            pst.setString(4, inpCpf.getText());
-            pst.setString(5, inpNascimento.getText());
-            pst.setString(6, inpEmail.getText());
-            pst.setString(7, inpTel.getText());
-            pst.setString(8, inpDdd.getText());
-            pst.setString(9, inpnomes.getText());
-            pst.setString(10, inpId.getText());
-        
-        int adicionado = pst.executeUpdate(); // retorna 1 se estiver correto
-        
+        pst = conexao.prepareStatement(sql);
+        pst.setString(1, inpnomes.getText());
+        pst.setString(2, inpDdd.getText());
+        pst.setString(3, inpTel.getText());
+        pst.setString(4, inpEmail.getText());
+        pst.setString(5, inpNascimento.getText());
+        pst.setString(6, inpCpf.getText());
+        pst.setString(7, inpEnd.getText());
+        pst.setString(8, inpCidade.getText());
+        pst.setString(9, inpEstado.getText());
+
+        int adicionado = pst.executeUpdate();
+
         if (adicionado > 0) {
-            JOptionPane.showMessageDialog(null, "Usuario Cadastrado");
-    //      Exibe a msg caso inserido com sucesso
-    //      as linhas abaixo irão limpar o formulario
-            inpTel.setText   (null);
-            inpnomes.setText  (null);
-            inpCidade.setText(null);         
-            inpnomes.setText  (null);
-            inpDdd.setText   (null);
-            inpTel.setText   (null);
-            inpEmail.setText (null);
-            inpNascimento.setText(null);
-            inpCpf.setText   (null);
-            inpEnd.setText   (null);
-            inpCidade.setText(null);
-            inpEstado.setText(null);
-        }    
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso.");
+            limparCampos();
+        }
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(null, "Erro ao adicionar usuário: " + e.getMessage());
     }
+    }
+        
+    private void limparCampos() {
+        inpTel.setText   (null);
+        inpnomes.setText (null);
+        inpCidade.setText(null);
+        inpDdd.setText   (null);
+        inpTel.setText   (null);
+        inpEmail.setText (null);
+        inpNascimento.setText(null);
+        inpCpf.setText   (null);
+        inpEnd.setText   (null);
+        inpCidade.setText(null);
+        inpEstado.setText(null);
     }
     
     private void alterar() {
@@ -141,59 +148,59 @@ public class tela_user extends javax.swing.JFrame {
         }
     }
     
-//    private String formatarCPF(String cpf) {
-//    // Remove caracteres não numéricos
-//    cpf = cpf.replaceAll("[^0-9]", "");
-//    
-//    // Insere os pontos e o traço
-//    return cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9);
-//}
-//
-//    public class CPFValidator {
-//        public static boolean validarCPF(String cpf_str) {
-//            // Verificar se o CPF tem 11 dígitos
-//            if (cpf_str.length() != 11) {
-//                JOptionPane.showMessageDialog(null, "CPF deve ter 11 dígitos. Tente novamente.");
-//                return false;
-//            }
-//
-//            char[] cpf_char = cpf_str.toCharArray();
-//            int[] cpf_int = new int[cpf_char.length];
-//
-//            for (int i = 0; i < cpf_char.length; i++) {
-//                cpf_int[i] = Character.getNumericValue(cpf_char[i]);
-//            }
-//
-//            // Calcular o primeiro dígito verificador
-//            int soma = 0;
-//            for (int i = 0; i < 9; i++) {
-//                soma += cpf_int[i] * (10 - i);
-//            }
-//            int primeiroDigito = 11 - (soma % 11);
-//            if (primeiroDigito > 9) {
-//                primeiroDigito = 0;
-//            }
-//
-//            // Calcular o segundo dígito verificador
-//            soma = 0;
-//            for (int i = 0; i < 10; i++) {
-//                soma += cpf_int[i] * (11 - i);
-//            }
-//            int segundoDigito = 11 - (soma % 11);
-//            if (segundoDigito > 9) {
-//                segundoDigito = 0;
-//            }
-//
-//            // Verificar se os dígitos verificadores estão corretos
-//            if (cpf_int[9] == primeiroDigito && cpf_int[10] == segundoDigito) {
-//                JOptionPane.showMessageDialog(null, "CPF válido.");
-//                return true;
-//            } else {
-//                JOptionPane.showMessageDialog(null, "CPF inválido. Tente novamente.");
-//                return false;
-//            }
-//        }
-//    }
+    private String formatarCPF(String cpf) {
+    // Remove caracteres não numéricos
+    cpf = cpf.replaceAll("[^0-9]", "");
+    
+    // Insere os pontos e o traço
+    return cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9);
+    }
+
+    public class CPFValidator {
+        public static boolean validarCPF(String cpf_str) {
+            // Verificar se o CPF tem 11 dígitos
+            if (cpf_str.length() != 11) {
+                JOptionPane.showMessageDialog(null, "CPF deve ter 11 dígitos. Tente novamente.");
+                return false;
+            }
+
+            char[] cpf_char = cpf_str.toCharArray();
+            int[] cpf_int = new int[cpf_char.length];
+
+            for (int i = 0; i < cpf_char.length; i++) {
+                cpf_int[i] = Character.getNumericValue(cpf_char[i]);
+            }
+
+            // Calcular o primeiro dígito verificador
+            int soma = 0;
+            for (int i = 0; i < 9; i++) {
+                soma += cpf_int[i] * (10 - i);
+            }
+            int primeiroDigito = 11 - (soma % 11);
+            if (primeiroDigito > 9) {
+                primeiroDigito = 0;
+            }
+
+            // Calcular o segundo dígito verificador
+            soma = 0;
+            for (int i = 0; i < 10; i++) {
+                soma += cpf_int[i] * (11 - i);
+            }
+            int segundoDigito = 11 - (soma % 11);
+            if (segundoDigito > 9) {
+                segundoDigito = 0;
+            }
+
+            // Verificar se os dígitos verificadores estão corretos
+            if (cpf_int[9] == primeiroDigito && cpf_int[10] == segundoDigito) {
+                JOptionPane.showMessageDialog(null, "CPF válido.");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "CPF inválido. Tente novamente.");
+                return false;
+            }
+        }
+    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -528,19 +535,8 @@ public class tela_user extends javax.swing.JFrame {
 
     private void btnLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimparActionPerformed
         // Função para limpar os dados no login:
-         //      as linhas abaixo irão limpar o formulario
-            inpTel.setText   (null);
-            inpnomes.setText  (null);
-            inpCidade.setText(null);         
-            inpnomes.setText  (null);
-            inpDdd.setText   (null);
-            inpTel.setText   (null);
-            inpEmail.setText (null);
-            inpNascimento.setText(null);
-            inpCpf.setText   (null);
-            inpEnd.setText   (null);
-            inpCidade.setText(null);
-            inpEstado.setText(null);
+        // As linhas abaixo irão limpar o formulario
+        limparCampos();
     }//GEN-LAST:event_btnLimparActionPerformed
 
     private void inpDddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpDddActionPerformed
