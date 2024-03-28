@@ -107,33 +107,32 @@ public class tela_user extends javax.swing.JFrame {
     }
     
     private void alterar() {
-//        String cpfFormatado = formatarCPF(inpCpf.getText());
+//  String cpfFormatado = formatarCPF(inpCpf.getText());
+    String sql = "UPDATE tb_dados SET nome = ?, DDD = ?, celular = ?, email = ?, dataNascimento = ?, cpf = ?, endereco = ?, cidade = ?, estado = ? WHERE email = ?";
 
-        String sql = "UPDATE tb_dados SET email = ?, DDD = ?, tel = ?, dataNascimento = ?, cpf = ?, endereco = ?, cidade = ?, estado = ? WHERE id = ?";
+    try {
+        pst = conexao.prepareStatement(sql);
+        pst.setString(1, inpnomes.getText());
+        pst.setString(2, inpDdd.getText());
+        pst.setString(3, inpTel.getText());
+        pst.setString(4, inpEmail.getText());
+        pst.setString(5, inpNascimento.getText());
+        pst.setString(6, inpCpf.getText());
+        pst.setString(7, inpEnd.getText());
+        pst.setString(8, inpCidade.getText());
+        pst.setString(9, inpEstado.getText());
+        pst.setString(10, inpEmail.getText()); // Usando o email para identificar o registro a ser alterado
 
-        try {
-            pst = conexao.prepareStatement(sql);
-            pst.setString(1, inpId.getText());
-            pst.setString(2, inpnomes.getText());
-            pst.setString(3, inpDdd.getText());
-            pst.setString(4, inpTel.getText());
-            pst.setString(5, inpEmail.getText());
-            pst.setString(6, inpNascimento.getText());
-            pst.setString(7, inpCpf.getText());
-            pst.setString(8, inpEnd.getText());
-            pst.setString(9, inpCidade.getText());
-            pst.setString(10, inpEstado.getText());
-            
-            int adicionado = pst.executeUpdate();
-            // Retorna 1 se OK
-            if (adicionado > 0) {
-                JOptionPane.showMessageDialog(null, "USUÁRIO ALTERADO COM SUCESSO");
-            }
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar usuário: " + e.getMessage());
+        int adicionado = pst.executeUpdate();
+
+        if (adicionado > 0) {
+            JOptionPane.showMessageDialog(null, "Usuário alterado com sucesso.");
+            limparCampos();
         }
-    }  
-    
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Erro ao alterar usuário: " + e.getMessage());
+    }
+}    
     private void apagar(){
         int confirma = JOptionPane.showConfirmDialog(null, "Tem certeza que deseja excluir este usuario?", "ATENÇÃO", JOptionPane.YES_NO_OPTION);
         if(confirma == JOptionPane.YES_OPTION){
