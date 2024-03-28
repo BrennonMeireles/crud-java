@@ -58,6 +58,8 @@ public class tela_user extends javax.swing.JFrame {
         }
     }
     private void adicionar(){
+        String cpfFormatado = formatarCPF(inpCpf.getText());
+
         String sql = "INSERT INTO tb_dados (id,nome,DDD,celular,email,dataNascimento,cpf,endereco,cidade,estado) VALUES (?,?,?,?,?,?,?,?,?,?)";
 
     try {
@@ -98,6 +100,8 @@ public class tela_user extends javax.swing.JFrame {
     }
     
     private void alterar() {
+        String cpfFormatado = formatarCPF(inpCpf.getText());
+
         String sql = "UPDATE tb_dados SET email = ?, DDD = ?, tel = ?, dataNascimento = ?, cpf = ?, endereco = ?, cidade = ?, estado = ? WHERE id = ?";
 
         try {
@@ -133,6 +137,60 @@ public class tela_user extends javax.swing.JFrame {
                 pst.executeUpdate();
             } catch(Exception e) {
                 JOptionPane.showMessageDialog(null, e);
+            }
+        }
+    }
+    
+    private String formatarCPF(String cpf) {
+    // Remove caracteres não numéricos
+    cpf = cpf.replaceAll("[^0-9]", "");
+    
+    // Insere os pontos e o traço
+    return cpf.substring(0, 3) + "." + cpf.substring(3, 6) + "." + cpf.substring(6, 9) + "-" + cpf.substring(9);
+}
+
+    public class CPFValidator {
+        public static boolean validarCPF(String cpf_str) {
+            // Verificar se o CPF tem 11 dígitos
+            if (cpf_str.length() != 11) {
+                JOptionPane.showMessageDialog(null, "CPF deve ter 11 dígitos. Tente novamente.");
+                return false;
+            }
+
+            char[] cpf_char = cpf_str.toCharArray();
+            int[] cpf_int = new int[cpf_char.length];
+
+            for (int i = 0; i < cpf_char.length; i++) {
+                cpf_int[i] = Character.getNumericValue(cpf_char[i]);
+            }
+
+            // Calcular o primeiro dígito verificador
+            int soma = 0;
+            for (int i = 0; i < 9; i++) {
+                soma += cpf_int[i] * (10 - i);
+            }
+            int primeiroDigito = 11 - (soma % 11);
+            if (primeiroDigito > 9) {
+                primeiroDigito = 0;
+            }
+
+            // Calcular o segundo dígito verificador
+            soma = 0;
+            for (int i = 0; i < 10; i++) {
+                soma += cpf_int[i] * (11 - i);
+            }
+            int segundoDigito = 11 - (soma % 11);
+            if (segundoDigito > 9) {
+                segundoDigito = 0;
+            }
+
+            // Verificar se os dígitos verificadores estão corretos
+            if (cpf_int[9] == primeiroDigito && cpf_int[10] == segundoDigito) {
+                JOptionPane.showMessageDialog(null, "CPF válido.");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "CPF inválido. Tente novamente.");
+                return false;
             }
         }
     }
@@ -450,7 +508,9 @@ public class tela_user extends javax.swing.JFrame {
     }//GEN-LAST:event_inpEndActionPerformed
 
     private void inpCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpCpfActionPerformed
-        // TODO add your handling code here:
+        // validar CPF
+        String cpf = inpCpf.getText();
+        boolean cpfValido = CPFValidator.validarCPF(cpf);
     }//GEN-LAST:event_inpCpfActionPerformed
 
     private void inpnomesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inpnomesActionPerformed

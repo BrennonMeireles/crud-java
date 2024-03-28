@@ -58,7 +58,7 @@ public class tela_sobre extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(52, 52, 52)
                 .addComponent(jLabel5)
-                .addContainerGap(91, Short.MAX_VALUE))
+                .addContainerGap(90, Short.MAX_VALUE))
         );
 
         pack();
